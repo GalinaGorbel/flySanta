@@ -24,6 +24,8 @@ let flySanta = () => {
 };
 
 function resetSanta() {
+    cancelAnimationFrame(flyInterval);
+    animate = false;
     img.style.top = '0px';
     count = 0;
 }
