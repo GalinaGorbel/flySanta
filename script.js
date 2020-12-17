@@ -10,20 +10,20 @@ let flyInterval,
 
 let flySanta = () => {
 
-        flyInterval = requestAnimationFrame(flySanta);
+    flyInterval = requestAnimationFrame(flySanta);
 
-        if (count < document.documentElement.clientHeight) {
-            img.style.top = count + 'px';
-            count++;
-             
-        } else {
+    if (count < document.documentElement.clientHeight) {
+        img.style.top = count + 'px';
+        count++;
 
-            cancelAnimationFrame(flyInterval);
-            count = 0;
-        }
+    } else {
+
+        cancelAnimationFrame(flyInterval);
+        count = 0;
+    }
 };
 
-function resetSanta () {
+function resetSanta() {
     img.style.top = '0px';
     count = 0;
 }
@@ -39,3 +39,45 @@ btn.addEventListener('click', () => {
 });
 
 reset.addEventListener('click', resetSanta);
+
+//УСЛОЖНЕННОЕ ЗАДАНИЕ #1
+let input = document.querySelector('input'),
+    text = document.querySelector('.text');
+
+function debounce(func, timer) {
+    return function () {
+        let previousCall = this.lastCall;
+
+        this.lastCall = Date.now();
+
+        if (previousCall && ((this.lastCall - previousCall) <= timer)) {
+            clearTimeout(this.lastCallTimer);
+        }
+
+        this.lastCallTimer = setTimeout(() => func(), timer);
+    };
+}
+
+let letter = () => {
+
+    text.innerHTML = input.value;
+};
+
+let debounceleLetter = debounce(letter, 2000);
+input.addEventListener('input', debounceleLetter);
+
+
+/* 
+function throttle(f, t) {
+    return function (args) {
+        let previousCall = this.lastCall;
+        this.lastCall = Date.now();
+        if (previousCall === undefined || (this.lastCall - previousCall) > t) { // throttle time has elapsed
+            f(args);
+        }
+    };
+}
+
+let logger = (args) => console.log(`My args are ${args}`);
+// throttle: call the logger at most once every two seconds
+let throttledLogger = throttle(logger, 2000);  */
