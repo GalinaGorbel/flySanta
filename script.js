@@ -65,7 +65,7 @@ let letter = () => {
     text.innerHTML = input.value;
 };
 
-let debounceleLetter = debounce(letter, 2000);
+let debounceleLetter = debounce(letter, 300);
 input.addEventListener('input', debounceleLetter);
 
 
